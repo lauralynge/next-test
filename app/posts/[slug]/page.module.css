@@ -1,0 +1,10 @@
+.post {
+  max-width: 42rem;
+}
+
+.date {
+  display: block;
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin: 2rem 0 0.5rem;
+}

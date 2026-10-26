@@ -1,27 +1,18 @@
+import { getPostBySlug } from "@/lib/wordpress";
+import { formatDate } from "@/lib/format";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 
 export default async function PostPage({ params }) {
   const { slug } = await params;
-
-  const response = await fetch(
-    `${process.env.WORDPRESS_URL}/wp-json/wp/v2/posts?slug=${slug}`,
-  );
-  // WordPress always returns an array, even for a single match
-  const posts = await response.json();
-  const post = posts[0];
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
-  } // ← NY: luk if her
+  }
 
-  const date = new Date(post.date).toLocaleDateString("en-GB", {
-    // ← NY
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const date = formatDate(post.date);
 
   return (
     <main>

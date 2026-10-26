@@ -1,4 +1,5 @@
 import { getPostBySlug } from "@/lib/wordpress";
+import { formatDate } from "@/lib/format";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
@@ -11,12 +12,7 @@ export default async function PostPage({ params }) {
     notFound();
   }
 
-  const date = new Date(post.date).toLocaleDateString("en-GB", {
-    // ← NY
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const date = formatDate(post.date);
 
   return (
     <main>

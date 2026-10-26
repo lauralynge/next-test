@@ -12,12 +12,20 @@ export default async function PostPage({ params }) {
     notFound();
   }
 
+  const image = post._embedded?.["wp:featuredmedia"]?.[0];
   const date = formatDate(post.date);
 
   return (
     <main>
       <article className={styles.post}>
         <Link href="/posts">← All posts</Link>
+        {image && (
+          <img
+            className="featured-image"
+            src={image.source_url}
+            alt={image.alt_text}
+          />
+        )}
         <time className={styles.date} dateTime={post.date}>
           {date}
         </time>

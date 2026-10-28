@@ -37,12 +37,12 @@ export default async function PostPage({ params }) {
           <ul className="meta">
             {time && (
               <li>
-                <strong>Time:</strong> {time}
+                <strong>Tid:</strong> {time}
               </li>
             )}
             {servings && (
               <li>
-                <strong>Servings:</strong> {servings}
+                <strong>Serveringer:</strong> {servings}
               </li>
             )}
           </ul>

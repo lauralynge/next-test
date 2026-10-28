@@ -14,6 +14,9 @@ export default async function PostPage({ params }) {
 
   const image = post._embedded?.["wp:featuredmedia"]?.[0];
   const date = formatDate(post.date);
+  // ACF fields from WordPress
+  const time = post.acf?.tid;
+  const servings = post.acf?.portioner;
 
   return (
     <main>
@@ -30,6 +33,20 @@ export default async function PostPage({ params }) {
           {date}
         </time>
         <h1 dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+        {(time || servings) && (
+          <ul className="meta">
+            {time && (
+              <li>
+                <strong>Time:</strong> {time}
+              </li>
+            )}
+            {servings && (
+              <li>
+                <strong>Servings:</strong> {servings}
+              </li>
+            )}
+          </ul>
+        )}
         <div
           className="wp-content"
           dangerouslySetInnerHTML={{ __html: post.content.rendered }}

@@ -89,3 +89,12 @@ a {
   height: auto;
   border-radius: 0.5rem;
 }
+
+/* Recipe meta (ACF fields) – shared by cards and post page */
+.meta {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}

@@ -7,6 +7,9 @@ export default function PostCard({ post }) {
   const image = post._embedded?.["wp:featuredmedia"]?.[0];
   const categories = post._embedded?.["wp:term"]?.[0] ?? [];
   const date = formatDate(post.date);
+  // ACF fields from WordPress – ?. prevents errors on posts without fields
+  const time = post.acf?.tid;
+  const servings = post.acf?.portioner;
 
   return (
     <article className={styles.card}>
@@ -27,6 +30,13 @@ export default function PostCard({ post }) {
       <time className={styles.date} dateTime={post.date}>
         {date}
       </time>
+      {/* Only render the list if at least one field has a value */}
+      {(time || servings) && (
+        <ul className="meta">
+          {time && <li>{time}</li>}
+          {servings && <li>{servings}</li>}
+        </ul>
+      )}
       <h2
         className={styles.title}
         dangerouslySetInnerHTML={{ __html: post.title.rendered }}
